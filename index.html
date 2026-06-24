@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full-Stack Developer Roadmap</title>
+  <meta name="description" content="An interactive, day-by-day developer roadmap for learning Full-Stack JavaScript: React, Next.js, Node, Express, MongoDB, and APIs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <p class="hero-eyebrow">Full-Stack Learning Path · 26-Week Masterclass</p>
+    <h1>Code Your Way to <span>Full-Stack</span></h1>
+    <p>A comprehensive 182-day interactive roadmap with daily hands-on projects, REST/GraphQL APIs, database modeling, and scalable cloud architecture.</p>
+    
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-n" id="statDaysCount">182</span>
+        <span class="hero-stat-l">Days</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">5</span>
+        <span class="hero-stat-l">Phases</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">182</span>
+        <span class="hero-stat-l">Projects</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n">26</span>
+        <span class="hero-stat-l">Weeks</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Controls & Content -->
+  <div class="container">
+    
+    <!-- Progress Dashboard & Contribution Grid -->
+    <section class="progress-dashboard">
+      <div class="progress-header">
+        <div class="progress-title">
+          <span>Overall Course Progress</span>
+          <span class="phase-btn-progress" id="progressSummary">0/182 Completed</span>
+        </div>
+        <span class="progress-percent" id="progressPercentText">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="overallProgressBar"></div>
+      </div>
+      
+      <!-- Contribution Map -->
+      <div class="contribution-calendar">
+        <div class="calendar-title">
+          <span>Learning Journey Calendar (182 Days)</span>
+          <span style="font-size: 10px;">Hover for details • Click to navigate</span>
+        </div>
+        <div class="calendar-grid" id="calendarGrid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="controls-panel">
+      <div class="search-container">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search by topic, day title, or project name... (Press '/' to focus)" />
+      </div>
+      
+      <div class="status-filters">
+        <button class="status-btn active" data-filter="all">All Days</button>
+        <button class="status-btn" data-filter="completed">Completed</button>
+        <button class="status-btn" data-filter="incomplete">Incomplete</button>
+        <button class="status-btn" data-filter="notes">With Notes</button>
+      </div>
+
+      <div class="filter-tags-container">
+        <span class="filter-label">Filter Tags:</span>
+        <button class="filter-tag" data-tag="Setup">Setup</button>
+        <button class="filter-tag" data-tag="CRUD">CRUD</button>
+        <button class="filter-tag" data-tag="Auth">Auth</button>
+        <button class="filter-tag" data-tag="Capstone">Capstone</button>
+        <button class="filter-tag" data-tag="State">State</button>
+        <button class="filter-tag" data-tag="Fetch">Fetch</button>
+        <button class="filter-tag" data-tag="DB">Database</button>
+        <button class="filter-tag" data-tag="Realtime">Realtime</button>
+        <button class="filter-tag" data-tag="DevOps">DevOps</button>
+        <button class="filter-tag" data-tag="Security">Security</button>
+      </div>
+    </section>
+
+    <!-- Sticky Navigation Tabs -->
+    <nav class="phase-nav-container">
+      <div class="phase-nav" id="phaseNav">
+        <!-- Rendered by JS based on ROADMAP_PHASES -->
+      </div>
+    </nav>
+
+    <!-- Main Content Panels -->
+    <main id="mainContent">
+      <!-- Curriculum rendered dynamically here -->
+    </main>
+
+  </div>
+
+  <!-- Footer Actions -->
+  <footer>
+    <div class="footer-actions">
+      <button class="footer-btn" id="exportBtn">Backup Progress (Export JSON)</button>
+      <button class="footer-btn" id="importBtn">Restore Progress (Import JSON)</button>
+      <button class="footer-btn" id="resetBtn" style="color: #f87171; border-color: rgba(248,113,113,0.2);">Reset All Progress</button>
+      <input type="file" id="importFileInput" class="hidden-file-input" accept=".json" />
+    </div>
+    <p>Full-Stack Developer Roadmap Masterclass · Deployed to Workspace</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="roadmap-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
