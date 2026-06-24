@@ -75,6 +75,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
       phaseNav.appendChild(btn);
     });
+
+    // ── Carousel arrow logic ──
+    const phaseNavEl = document.getElementById('phaseNav');
+    const prevBtn    = document.getElementById('phaseNavPrev');
+    const nextBtn    = document.getElementById('phaseNavNext');
+
+    function updateArrows() {
+      if (!phaseNavEl) return;
+      const atStart = phaseNavEl.scrollLeft <= 4;
+      const atEnd   = phaseNavEl.scrollLeft + phaseNavEl.clientWidth >= phaseNavEl.scrollWidth - 4;
+      if (prevBtn) prevBtn.disabled = atStart;
+      if (nextBtn) nextBtn.disabled = atEnd;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        phaseNavEl.scrollBy({ left: -220, behavior: 'smooth' });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        phaseNavEl.scrollBy({ left: 220, behavior: 'smooth' });
+      });
+    }
+    if (phaseNavEl) {
+      phaseNavEl.addEventListener('scroll', updateArrows);
+      // Initial state
+      updateArrows();
+    }
   }
 
   // Switch Phase Tab
@@ -86,7 +115,17 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.remove('active');
     });
     const activeBtn = document.getElementById(`phase-btn-${phaseId}`);
-    if (activeBtn) activeBtn.classList.add('active');
+    if (activeBtn) {
+      activeBtn.classList.add('active');
+      // Auto-scroll active button into view inside the nav track
+      const nav = document.getElementById('phaseNav');
+      if (nav) {
+        const btnLeft  = activeBtn.offsetLeft;
+        const btnWidth = activeBtn.offsetWidth;
+        const navWidth = nav.clientWidth;
+        nav.scrollTo({ left: btnLeft - (navWidth / 2) + (btnWidth / 2), behavior: 'smooth' });
+      }
+    }
 
     // Set document root variables to matching phase colors for dynamic UI highlights
     const phaseObj = window.ROADMAP_PHASES.find(p => p.id === phaseId);
@@ -183,6 +222,15 @@ document.addEventListener('DOMContentLoaded', () => {
                   <div class="project-tag">Daily Hands-on Project</div>
                   <div class="project-name">🛠️ ${day.project.n}</div>
                   <div class="project-desc">${day.project.desc}</div>
+                  
+                  ${day.iq && day.iq.length ? `
+                  <div class="iq-block">
+                    <div class="iq-label">🧠 Interview Questions</div>
+                    <ol class="iq-list">
+                      ${day.iq.map(q => `<li class="iq-item">${q}</li>`).join('')}
+                    </ol>
+                  </div>
+                  ` : ''}
                   
                   <div class="notes-container">
                     <div class="notes-header">
